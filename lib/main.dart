@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+import 'package:provider/provider.dart';
+import 'states/auth_state.dart';
 import 'ui/app_scaffold.dart';
+import 'ui/login_part.dart';
 
 void main() {
-  runApp(const App());
+  runApp(
+    ChangeNotifierProvider<AuthState>(
+      create: (context) => AuthState(),
+      child: const App(),
+    ),
+  );
 }
 
 class App extends StatelessWidget {
@@ -41,7 +49,7 @@ class App extends StatelessWidget {
             ),
         '/login': (context) => const AppScaffold(
               title: 'Connexion',
-              body: Placeholder(child: Center(child: Text('LOGIN'))),
+              body: LoginPage(),
             ),
         '/signup': (context) => const AppScaffold(
               title: 'Inscription',

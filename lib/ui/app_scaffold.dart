@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../states/auth_state.dart';
 
 class AppScaffold extends StatelessWidget {
   const AppScaffold({
@@ -12,6 +14,9 @@ class AppScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authState = context.watch<AuthState>();
+    final user = authState.currentUser;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(title ?? 'Event Poll'),
@@ -21,8 +26,16 @@ class AppScaffold extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            const DrawerHeader(
-              child: Text('Connectez-vous pour vous inscrire à un événement !'),
+            SizedBox(
+              height: 65,
+              child: DrawerHeader(
+                decoration: const BoxDecoration(color: Colors.blue),
+                child: user == null
+                    ? const Text('Utilisateur non connecté',
+                        style: TextStyle(color: Colors.white))
+                    : Text('Bienvenue, ${user.username}',
+                        style: const TextStyle(color: Colors.white)),
+              ),
             ),
             ListTile(
               leading: const Icon(Icons.event),
@@ -54,6 +67,7 @@ class AppScaffold extends StatelessWidget {
               onTap: () {
                 Navigator.pushNamedAndRemoveUntil(
                     context, '/polls', (_) => false);
+                authState.logout();
               },
             ),
           ],

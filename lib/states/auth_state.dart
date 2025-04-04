@@ -12,7 +12,7 @@ class AuthState extends ChangeNotifier {
 
   User? get currentUser => _currentUser;
   String? get token => _token;
-  bool get isLoggedIn => false;
+  bool get isLoggedIn => _currentUser != null;
 
   Future<User?> login(String username, String password) async {
     final loginResponse = await http.post(
