@@ -1,6 +1,6 @@
 {
-    "name": "f",
-    "short_name": "f",
+    "name": "event_poll",
+    "short_name": "event_poll",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

@@ -1,4 +1,4 @@
-package com.example.f
+package com.example.event_poll
 
 import io.flutter.embedding.android.FlutterActivity
 
